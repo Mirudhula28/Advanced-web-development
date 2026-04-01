@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HireStream | Premium Job Portal</title>
+
+    <style>
+
+        /* Modern Design System */
+
+        :root {
+
+            --primary: #6366f1;
+
+            --primary-hover: #4f46e5;
+
+            --accent: #f43f5e;
+
+            --bg: #f8fafc;
+
+            --text-main: #1e293b;
+
+            --text-muted: #64748b;
+
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+            
+
+            /* Role Colors */
+
+            --tag-frontend: #dcfce7;
+
+            --text-frontend: #166534;
+
+            --tag-backend: #dbeafe;
+
+            --text-backend: #1e40af;
+
+            --tag-design: #fef3c7;
+
+            --text-design: #92400e;
+
+        }
+
+
+
+        * { box-sizing: border-box; transition: all 0.2s ease; }
+
+
+
+        body {
+
+            font-family: 'Inter', system-ui, sans-serif;
+
+            background-color: var(--bg);
+
+            margin: 0;
+
+            color: var(--text-main);
+
+            line-height: 1.5;
+
+        }
+
+
+
+        /* Header - Fixed to be Straight */
+
+        header {
+
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+
+            color: white;
+
+            padding: 4rem 1rem 5rem 1rem; /* Added bottom padding for spacing */
+
+            text-align: center;
+
+            /* Slanting effect (clip-path) removed here */
+
+        }
+
+
+
+        .search-section {
+
+            max-width: 900px;
+
+            margin: -45px auto 20px; /* Centered over the header line */
+
+            padding: 20px;
+
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow: var(--card-shadow);
+
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            position: relative; /* Ensures it stays on top */
+
+            z-index: 10;
+
+        }
+
+
+
+        input, select {
+
+            flex: 1;
+
+            min-width: 200px;
+
+            padding: 12px 15px;
+
+            border: 2px solid #f1f5f9;
+
+            border-radius: 10px;
+
+            font-size: 1rem;
+
+        }
+
+
+
+        input:focus { border-color: var(--primary); outline: none; }
+
+
+
+        /* Layout */
+
+        .main-container {
+
+            display: grid;
+
+            grid-template-columns: 1fr 350px;
+
+            gap: 2rem;
+
+            max-width: 1250px;
+
+            margin: 2rem auto;
+
+            padding: 0 1.5rem;
+
+        }
+
+
+
+        /* Job Cards */
+
+        .job-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+            gap: 1.5rem;
+
+        }
+
+
+
+        .job-card {
+
+            background: white;
+
+            border-radius: 16px;
+
+            padding: 1.5rem;
+
+            border: 1px solid #eef2f6;
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+
+        .job-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+
+        }
+
+
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 4px 12px;
+
+            border-radius: 20px;
+
+            font-size: 0.75rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+
+            width: fit-content;
+
+        }
+
+
+
+        .badge-Frontend { background: var(--tag-frontend); color: var(--text-frontend); }
+
+        .badge-Backend { background: var(--tag-backend); color: var(--text-backend); }
+
+        .badge-Design { background: var(--tag-design); color: var(--text-design); }
+
+
+
+        .company-info { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+
+        
+
+        .logo-box {
+
+            width: 50px;
+
+            height: 50px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 1.2rem;
+
+        }
+
+
+
+        .job-title { font-size: 1.25rem; font-weight: 800; margin: 0; }
+
+        .salary { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+
+        .desc { font-size: 0.9rem; color: var(--text-muted); margin: 10px 0; }
+
+
+
+        .btn-group {
+
+            margin-top: auto;
+
+            display: flex;
+
+            gap: 10px;
+
+            padding-top: 15px;
+
+        }
+
+
+
+        .apply-btn {
+
+            flex: 2;
+
+            background: var(--primary);
+
+            color: white;
+
+            border: none;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .save-btn {
+
+            flex: 1;
+
+            background: #f1f5f9;
+
+            border: none;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 1.1rem;
+
+        }
+
+
+
+        .save-btn.active { background: #fee2e2; color: var(--accent); }
+
+
+
+        /* Sidebar */
+
+        .saved-sidebar {
+
+            background: white;
+
+            padding: 1.5rem;
+
+            border-radius: 16px;
+
+            height: fit-content;
+
+            position: sticky;
+
+            top: 20px;
+
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+
+            border: 1px solid #eef2f6;
+
+        }
+
+
+
+        .saved-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 12px;
+
+            background: #f8fafc;
+
+            border-radius: 8px;
+
+            margin-bottom: 10px;
+
+            border: 1px solid #f1f5f9;
+
+        }
+
+
+
+        .remove-btn { color: var(--accent); cursor: pointer; border: none; background: none; font-size: 1.2rem; font-weight: bold; }
+
+
+
+        @media (max-width: 900px) {
+
+            .main-container { grid-template-columns: 1fr; }
+
+            .saved-sidebar { order: -1; position: relative; }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <header>
+
+        <h1 style="margin: 0; font-size: 2.5rem;">🚀 Find Your Dream Career</h1>
+
+        <p style="opacity: 0.9; margin-top: 10px;">Explore 5,000+ new job opportunities every day</p>
+
+    </header>
+
+
+
+    <div class="search-section">
+
+        <input type="text" id="searchInput" placeholder="Job title or keywords...">
+
+        <select id="companyFilter">
+
+            <option value="">All Companies</option>
+
+            <option value="Microsoft">Microsoft</option>
+
+            <option value="Apple">Apple</option>
+
+            <option value="Spotify">Spotify</option>
+
+            <option value="Tesla">Tesla</option>
+
+        </select>
+
+        <select id="roleFilter">
+
+            <option value="">All Categories</option>
+
+            <option value="Frontend">Frontend</option>
+
+            <option value="Backend">Backend</option>
+
+            <option value="Design">Design</option>
+
+        </select>
+
+    </div>
+
+
+
+    <main class="main-container">
+
+        <section id="jobGrid" class="job-grid">
+
+            </section>
+
+
+
+        <aside class="saved-sidebar">
+
+            <h3 style="margin-top: 0; display: flex; align-items: center; gap: 8px;">
+
+                ⭐ Saved Jobs (<span id="savedCount">0</span>)
+
+            </h3>
+
+            <div id="savedContainer">
+
+                <p style="color: var(--text-muted); font-size: 0.9rem;">No jobs bookmarked yet.</p>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+
+    <script>
+
+        const jobData = [
+
+            { id: 1, title: "Senior UI Engineer", company: "Microsoft", color: "#00a4ef", salary: "$150k - $180k", location: "Remote", role: "Frontend", desc: "Build next-gen cloud interfaces using React and TS.", date: "2 days ago" },
+
+            { id: 2, title: "Staff Backend Developer", company: "Apple", color: "#000000", salary: "$165k - $200k", location: "Cupertino, CA", role: "Backend", desc: "Optimize high-performance distributed systems.", date: "5 hours ago" },
+
+            { id: 3, title: "Lead Product Designer", company: "Spotify", color: "#1db954", salary: "$130k - $160k", location: "Stockholm", role: "Design", desc: "Shape the future of music streaming experience.", date: "Just now" },
+
+            { id: 4, title: "Full Stack Engineer", company: "Tesla", color: "#e82127", salary: "$140k - $175k", location: "Austin, TX", role: "Backend", desc: "Develop software for sustainable energy solutions.", date: "1 day ago" },
+
+            { id: 5, title: "Junior React Dev", company: "Microsoft", color: "#00a4ef", salary: "$90k - $110k", location: "Redmond", role: "Frontend", desc: "Kickstart your career in our Azure UI team.", date: "3 days ago" },
+
+            { id: 6, title: "Brand Identity Designer", company: "Apple", color: "#555555", salary: "$110k - $140k", location: "Remote", role: "Design", desc: "Crafting visual stories for world-class products.", date: "4 days ago" }
+
+        ];
+
+
+
+        let savedJobs = [];
+
+
+
+        function renderJobs(data) {
+
+            const grid = document.getElementById('jobGrid');
+
+            grid.innerHTML = data.map(job => {
+
+                const isSaved = savedJobs.some(s => s.id === job.id);
+
+                return `
+
+                    <div class="job-card">
+
+                        <span class="badge badge-${job.role}">${job.role}</span>
+
+                        <div class="company-info">
+
+                            <div class="logo-box" style="background: ${job.color}">${job.company[0]}</div>
+
+                            <div>
+
+                                <h3 class="job-title">${job.title}</h3>
+
+                                <small style="color: var(--text-muted)">${job.company} • ${job.date}</small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="salary">${job.salary}</div>
+
+                        <p class="desc">${job.desc}</p>
+
+                        <div style="font-size: 0.85rem; margin-bottom: 5px;">📍 ${job.location}</div>
+
+                        
+
+                        <div class="btn-group">
+
+                            <button class="apply-btn" onclick="alert('Applying for ${job.title}...')">Apply Now</button>
+
+                            <button class="save-btn ${isSaved ? 'active' : ''}" onclick="toggleSave(${job.id})">
+
+                                ${isSaved ? '❤️' : '🤍'}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join('');
+
+        }
+
+
+
+        window.toggleSave = (id) => {
+
+            const index = savedJobs.findIndex(j => j.id === id);
+
+            if (index > -1) {
+
+                savedJobs.splice(index, 1);
+
+            } else {
+
+                const job = jobData.find(j => j.id === id);
+
+                savedJobs.push(job);
+
+            }
+
+            updateSavedUI();
+
+            filterJobs();
+
+        };
+
+
+
+        function updateSavedUI() {
+
+            const container = document.getElementById('savedContainer');
+
+            document.getElementById('savedCount').innerText = savedJobs.length;
+
+            
+
+            if (savedJobs.length === 0) {
+
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">No jobs bookmarked yet.</p>`;
+
+                return;
+
+            }
+
+
+
+            container.innerHTML = savedJobs.map(job => `
+
+                <div class="saved-item">
+
+                    <div>
+
+                        <div style="font-weight: 700; font-size: 0.85rem;">${job.title}</div>
+
+                        <small style="color: var(--text-muted)">${job.company}</small>
+
+                    </div>
+
+                    <button class="remove-btn" onclick="toggleSave(${job.id})">×</button>
+
+                </div>
+
+            `).join('');
+
+        }
+
+
+
+        function filterJobs() {
+
+            const query = document.getElementById('searchInput').value.toLowerCase();
+
+            const company = document.getElementById('companyFilter').value;
+
+            const role = document.getElementById('roleFilter').value;
+
+
+
+            const filtered = jobData.filter(job => {
+
+                return (job.title.toLowerCase().includes(query)) &&
+
+                       (company === "" || job.company === company) &&
+
+                       (role === "" || job.role === role);
+
+            });
+
+            renderJobs(filtered);
+
+        }
+
+
+
+        document.getElementById('searchInput').addEventListener('input', filterJobs);
+
+        document.getElementById('companyFilter').addEventListener('change', filterJobs);
+
+        document.getElementById('roleFilter').addEventListener('change', filterJobs);
+
+
+
+        renderJobs(jobData);
+
+    </script>
+
+</body>
+
+</html>
